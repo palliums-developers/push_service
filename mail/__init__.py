@@ -9,18 +9,20 @@ class Client():
     def __init__(self, **kwargs):
         self.user = kwargs.get("user")
         self.host = kwargs.get("host")
-        self.port = kwargs.get("port")
         self.ssl = kwargs.get("ssl")
         self.sender = kwargs.get("sender")
         self.password = kwargs.get("password")
+        self.port = 465 if self.ssl else 5
 
     def send(self, address, txt, subject):
         msg = MIMEText(txt, "plain", "utf-8")
         msg["From"] = self._format_addr(self.sender, "")
         msg["To"] = self._format_addr(address, "")
-        msg["Subject"] = Header(subject,'utf-8').encode()
+        msg["Subject"] = Header(subject, 'utf-8').encode()
         self.server = smtplib.SMTP_SSL(timeout=5) if self.ssl == True else smtplib.SMTP(timeout=5)
+        self.server.set_debuglevel(1)
         self.server.connect(self.host, self.port)
+        print(self.user, self.password)
         self.server.login(self.user, self.password)
         self.server.sendmail(self.sender, [address], msg.as_string())
         self.server.close()
