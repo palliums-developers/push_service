@@ -20,8 +20,8 @@ class Client():
         msg["From"] = self._format_addr(self.sender, "")
         msg["To"] = self._format_addr(receiver, "")
         msg["Subject"] = Header(subject, 'utf-8').encode()
+        print(msg)
         self.server = smtplib.SMTP_SSL(host=self.host, timeout=5) if self.ssl == True else smtplib.SMTP(host=self.host, timeout=5)
-        self.server.set_debuglevel(1)
         self.server.connect(self.host, self.port)
         self.server.login(self.user, self.password)
         self.server.sendmail(self.sender, [receiver], msg.as_string())
@@ -33,4 +33,4 @@ class Client():
 
 if __name__ == "__main__":
     client = Client()
-    client.send("hxg@palliums.org", "this is test", "test")
+    client.send("hxg@palliums.org", "text", "subject")
