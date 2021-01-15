@@ -15,4 +15,4 @@ class Client():
 
 if __name__ == "__main__":
     client = Client()
-    client.send("+8618710206362", "【Violas】您有一条来自 1 的数据请求需要处理 。")
+    client.send("+8618710206362", "【Violas】您有一条来自 3 的数据请求需要处理 。")

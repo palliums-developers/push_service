@@ -34,7 +34,9 @@ def send_sms():
         receiver = pdata.get("receiver")
         text = pdata.get("text")
         client = SMSClient()
-        client.send(receiver, text)
+        r = client.send(receiver, text)
+        if r.code() != 0:
+            return make_response(CODE_ERROR, str(r.msg()))
         return make_response(CODE_OK)
     except Exception as e:
         return make_response(CODE_ERROR, str(e))
