@@ -8,11 +8,11 @@ class Client():
 
     def send(self, receiver, text):
         param = {
-            YC.receiver: receiver,
+            YC.MOBILE: receiver,
             YC.TEXT: text
         }
         return self.client.sms().single_send(param)
 
 if __name__ == "__main__":
     client = Client()
-    client.send("+8618710206362", "【sealpay】您的手机账户注册登录验证码是8888（若非本人操作，请删除本短信）")
+    client.send("+8618710206362", "【Violas】您有一条来自 1 的数据请求需要处理 。")
